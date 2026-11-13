@@ -1,92 +1,92 @@
-# Laboratorio 02 – Benchmarking de algoritmos: buscar duplicados
+# Laboratory 02 – Algorithm Benchmarking: Finding Duplicates
 
-**Algoritmos · Semana 2 · Ingeniería en Sistemas de Información – Cuarto semestre (UCE)**
+**Algorithms · Week 2 · Information Systems Engineering – S04-002**
 
-## Problema
+## Problem
 
-Determinar si una lista de enteros contiene valores repetidos, comparando dos soluciones correctas que producen la misma respuesta.
+Determine whether a list of integers contains repeated values, comparing two correct solutions that produce the same answer.
 
-| Algoritmo | Estrategia | Clase |
+| Algorithm | Strategy | Class |
 |---|---|---|
-| A | **Doble recorrido:** compara cada elemento con todos los siguientes | `Algorithm_A.java` |
-| B | **Estructura auxiliar:** guarda en un arreglo los valores ya vistos y busca cada nuevo valor en él | `Algorithm_B.java` |
+| A | **Double loop:** compares each element with all the following ones | `Algorithm_A.java` |
+| B | **Auxiliary structure:** stores the values already seen in an array and searches each new value in it | `Algorithm_B.java` |
 
-## Cómo ejecutar
+## How to run
 
-Cada clase es independiente y tiene su propio `main`:
+Each class is independent and has its own `main` method:
 
-1. Abrir el proyecto en IntelliJ IDEA.
-2. Clic derecho en `Algorithm_A` → **Run**.
-3. Clic derecho en `Algorithm_B` → **Run**.
+1. Open the project in IntelliJ IDEA.
+2. Right-click `Algorithm_A` → **Run**.
+3. Right-click `Algorithm_B` → **Run**.
 
-Cada programa imprime sus tablas de resultados en la consola. El caso de n = 1.000.000 sin duplicados tarda varios minutos; para omitirlo, cambiar `RUN_WORST_CASE_ONE_MILLION` a `false`.
+Each program prints its results tables in the console. The case of n = 1,000,000 without duplicates takes several minutes; to skip it, set `RUN_WORST_CASE_ONE_MILLION` to `false`.
 
-## Metodología (8 pasos)
+## Methodology (8 steps)
 
-| Paso | Implementación |
+| Step | Implementation |
 |---|---|
-| 01 Generar datasets | `generateNoDuplicates()` y `generateEarlyDuplicate()`: números del 1 al n mezclados con *Fisher-Yates* y semilla fija (`42 + n`), para que A y B reciban exactamente los mismos datos |
-| 02 Ejecutar algoritmo A | `Algorithm_A.hasDuplicates()` |
-| 03 Ejecutar algoritmo B | `Algorithm_B.hasDuplicates()` |
-| 04 Contar operaciones | `countOperations()`: suma 1 por cada comparación entre dos valores |
-| 05 Medir tiempo | `System.nanoTime()` antes y después de cada ejecución de `hasDuplicates()`; resultado en milisegundos |
-| 06 Repetir pruebas | Cada medición se repite 3 veces y se reporta el promedio |
-| 07 Registrar tabla | Tablas en consola y en `Lab02_Comparativo.xlsx` |
-| 08 Concluir técnicamente | Sección **Conclusiones** de este README |
+| 01 Generate datasets | `generateNoDuplicates()` and `generateEarlyDuplicate()`: numbers from 1 to n shuffled with *Fisher-Yates* and a fixed seed (`42 + n`), so that A and B receive exactly the same data |
+| 02 Run algorithm A | `Algorithm_A.hasDuplicates()` |
+| 03 Run algorithm B | `Algorithm_B.hasDuplicates()` |
+| 04 Count operations | `countOperations()`: adds 1 for every comparison between two values |
+| 05 Measure time | `System.nanoTime()` before and after each execution of `hasDuplicates()`; result in milliseconds |
+| 06 Repeat tests | Each measurement is repeated 3 times and the average is reported |
+| 07 Record table | Tables in the console and in `Lab02_Comparativo.xlsx` |
+| 08 Technical conclusions | **Conclusions** section of this README |
 
-Se evaluaron dos escenarios, según los aspectos a comparar del caso guía:
+Two scenarios were evaluated, based on the aspects to compare in the guide case:
 
-- **Duplicado temprano (mejor caso):** el segundo elemento repite al primero.
-- **Sin duplicados (peor caso):** todos los valores son distintos, así que el algoritmo debe revisar toda la lista.
+- **Early duplicate (best case):** the second element repeats the first one.
+- **No duplicates (worst case):** all values are different, so the algorithm must check the entire list.
 
-Tamaños: `n = [100, 1_000, 10_000, 100_000, 1_000_000]`
+Sizes: `n = [100, 1_000, 10_000, 100_000, 1_000_000]`
 
-## Resultados
+## Results
 
-> Los tiempos dependen del equipo donde se ejecuta. El número de operaciones es exacto y no cambia entre equipos. La tabla completa, con las 3 pruebas de cada medición y gráficos, está en `Lab02_Comparativo.xlsx`.
+> Times depend on the computer where the program runs. The number of operations is exact and does not change between computers. The full table, with the 3 tests of each measurement and charts, is in `Lab02_Comparativo.xlsx`.
 
-### Escenario 1: duplicado temprano (mejor caso)
+### Scenario 1: early duplicate (best case)
 
-| Algoritmo | n | Operaciones | Tiempo promedio (ms) |
+| Algorithm | n | Operations | Average time (ms) |
 |---|---|---|---|
-| A | 100 | 1 | 0,0002 |
-| A | 1.000 | 1 | 0,0001 |
-| A | 10.000 | 1 | 0,0001 |
-| A | 100.000 | 1 | 0,0002 |
-| A | 1.000.000 | 1 | 0,0003 |
-| B | 100 | 1 | 0,0003 |
-| B | 1.000 | 1 | 0,0019 |
-| B | 10.000 | 1 | 0,0079 |
-| B | 100.000 | 1 | 0,4901 |
-| B | 1.000.000 | 1 | 0,8352 |
+| A | 100 | 1 | 0.0002 |
+| A | 1,000 | 1 | 0.0001 |
+| A | 10,000 | 1 | 0.0001 |
+| A | 100,000 | 1 | 0.0002 |
+| A | 1,000,000 | 1 | 0.0003 |
+| B | 100 | 1 | 0.0003 |
+| B | 1,000 | 1 | 0.0019 |
+| B | 10,000 | 1 | 0.0079 |
+| B | 100,000 | 1 | 0.4901 |
+| B | 1,000,000 | 1 | 0.8352 |
 
-### Escenario 2: sin duplicados (peor caso)
+### Scenario 2: no duplicates (worst case)
 
-| Algoritmo | n | Operaciones | Tiempo promedio (ms) |
+| Algorithm | n | Operations | Average time (ms) |
 |---|---|---|---|
-| A | 100 | 4.950 | 0,0342 |
-| A | 1.000 | 499.500 | 1,4607 |
-| A | 10.000 | 49.995.000 | 6,5928 |
-| A | 100.000 | 4.999.950.000 | 662,3929 |
-| A | 1.000.000 | 499.999.500.000 | COMPLETAR |
-| B | 100 | 4.950 | 0,0347 |
-| B | 1.000 | 499.500 | 0,6294 |
-| B | 10.000 | 49.995.000 | 7,1151 |
-| B | 100.000 | 4.999.950.000 | 834,6961 |
-| B | 1.000.000 | 499.999.500.000 | COMPLETAR |
+| A | 100 | 4,950 | 0.0342 |
+| A | 1,000 | 499,500 | 1.4607 |
+| A | 10,000 | 49,995,000 | 6.5928 |
+| A | 100,000 | 4,999,950,000 | 662.3929 |
+| A | 1,000,000 | 499,999,500,000 | COMPLETE |
+| B | 100 | 4,950 | 0.0347 |
+| B | 1,000 | 499,500 | 0.6294 |
+| B | 10,000 | 49,995,000 | 7.1151 |
+| B | 100,000 | 4,999,950,000 | 834.6961 |
+| B | 1,000,000 | 499,999,500,000 | COMPLETE |
 
-## Conclusiones
+## Conclusions
 
-1. **Ambos algoritmos son correctos:** con los mismos datos devuelven la misma respuesta (`true` con duplicado temprano y `false` sin duplicados).
+1. **Both algorithms are correct:** with the same data, they return the same answer (`true` with an early duplicate and `false` without duplicates).
 
-2. **En el peor caso, ambos tienen complejidad O(n²).** Las operaciones siguen exactamente la fórmula n(n−1)/2: cuando n se multiplica por 10, las operaciones se multiplican por 100 (4.950 → 499.500 → 49.995.000 → 4.999.950.000 → 499.999.500.000). El tiempo crece en la misma proporción: A pasó de ≈6,6 ms con n = 10.000 a ≈662 ms con n = 100.000 (≈100 veces más) y a ≈COMPLETAR ms con n = 1.000.000.
+2. **In the worst case, both have O(n²) complexity.** The operations follow exactly the formula n(n−1)/2: when n is multiplied by 10, the operations are multiplied by 100 (4,950 → 499,500 → 49,995,000 → 4,999,950,000 → 499,999,500,000). Time grows in the same proportion: A went from ≈6.6 ms with n = 10,000 to ≈662 ms with n = 100,000 (≈100 times more) and to ≈COMPLETE ms with n = 1,000,000.
 
-3. **A y B hacen exactamente la misma cantidad de comparaciones.** La estructura auxiliar de B es un arreglo que se recorre de forma secuencial, así que comprobar si un valor "ya fue visto" exige compararlo con todos los anteriores, igual que A. B no reduce el trabajo; solo lo reorganiza. Por eso sus tiempos en el peor caso son similares; las diferencias se deben al costo adicional de escribir en el arreglo y a variaciones del equipo.
+3. **A and B perform exactly the same number of comparisons.** B's auxiliary structure is an array that is traversed sequentially, so checking whether a value "has already been seen" requires comparing it with all the previous ones, just like A. B does not reduce the work; it only reorganizes it. That is why their worst-case times are similar; the differences come from the extra cost of writing to the array and from variations of the computer.
 
-4. **En el mejor caso (duplicado temprano), ambos hacen 1 sola comparación,** es decir O(1). Aun así, el tiempo de B crece con n (de 0,0003 ms a 0,84 ms), porque antes de comparar debe crear el arreglo `seen` de tamaño n, y reservar e inicializar esa memoria tiene un costo proporcional a n. A se mantiene prácticamente en 0 ms.
+4. **In the best case (early duplicate), both perform only 1 comparison,** that is, O(1). Even so, B's time grows with n (from 0.0003 ms to 0.84 ms), because before comparing it must create the `seen` array of size n, and allocating and initializing that memory has a cost proportional to n. A stays practically at 0 ms.
 
-5. **Memoria usada:** A no necesita memoria adicional, solo variables de control (O(1)). B reserva un arreglo de n enteros (O(n)): unos 4 MB con n = 1.000.000 (4 bytes × n).
+5. **Memory used:** A needs no additional memory, only control variables (O(1)). B allocates an array of n integers (O(n)): about 4 MB with n = 1,000,000 (4 bytes × n).
 
-6. **Variabilidad de las mediciones:** algunas pruebas aisladas salieron mucho más altas que las demás (por ejemplo, B con n = 100.000 en el mejor caso: 1,42 ms en la prueba 1 frente a ≈0,02 ms en las otras), por la optimización automática de Java (JIT) y otros procesos del equipo. Por eso cada medición se repitió 3 veces y se reporta el promedio.
+6. **Measurement variability:** some isolated tests were much higher than the others (for example, B with n = 100,000 in the best case: 1.42 ms in test 1 versus ≈0.02 ms in the others), due to Java's automatic optimization (JIT) and other processes running on the computer. That is why each measurement was repeated 3 times and the average is reported.
 
-7. **Respuesta a la pregunta del caso (n = 1.000.000):** ninguna de las dos escala bien. En el peor caso, ambas necesitan unas 500.000 millones de comparaciones y cada ejecución tardó alrededor de COMPLETAR segundos. Entre las dos, **A es preferible**: hace las mismas comparaciones, no usa memoria extra y no paga el costo de crear el arreglo auxiliar. Para que una estructura auxiliar realmente mejore el rendimiento, debe poder responder "¿ya vi este valor?" sin recorrerse completa (por ejemplo, un conjunto basado en *hashing* o un arreglo de marcas indexado por valor), lo que reduciría el algoritmo a O(n).
+7. **Answer to the guide case question (n = 1,000,000):** neither of them scales well. In the worst case, both need about 500,000 million comparisons, and each run took about COMPLETE seconds. Between the two, **A is preferable**: it performs the same comparisons, uses no extra memory, and does not pay the cost of creating the auxiliary array. For an auxiliary structure to actually improve performance, it must be able to answer "have I seen this value already?" without traversing itself completely (for example, a hash-based set or a marker array indexed by value), which would reduce the algorithm to O(n).
